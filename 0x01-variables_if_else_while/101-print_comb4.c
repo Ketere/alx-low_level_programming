@@ -1,6 +1,6 @@
 /*
  * File: 101-print_comb4.c
- * Auth: Brennan D Baraban
+ * Auth: Leonard Ketere
  */
 
 #include <stdio.h>
@@ -11,6 +11,7 @@
  *
  * Return: Always 0.
  */
+
 int main(void)
 {
 	int digit1, digit2, digit3;
