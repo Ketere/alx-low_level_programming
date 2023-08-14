@@ -2,7 +2,14 @@
 #include <stdlib.h>
 #include <time.h>
 
-/* betty style doc for function main goes there */
+/**
+ * main - Entry point of the program
+ *
+ * Description: This program assigns a random number to the variable n
+ * and then prints whether the number is positive, negative, or zero.
+ *
+ * Return: Always 0 (Success)
+ */
 int main(void)
 {
     int n;
