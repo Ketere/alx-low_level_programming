@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-#include <stdiop.h>
->>>>>>> 04c80c7e849e8795d5cc737fcd7d3375dfe3a56b
 #include <unistd.h>
 
 /**
