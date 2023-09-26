@@ -1,45 +1,46 @@
-#include <stdlib.h>
-#include "lists.h" // Include your header file that contains the listint_t structure.
+#include "lists.h"
 
 /**
- * delete_nodeint_at_index - Deletes the node at a given index in a listint_t list.
- * @head: A pointer to a pointer to the head of the list.
- * @index: The index of the node to be deleted (starting at 0).
- *
+ * delete_nodeint_at_index - deletes the node at index of a listint_t list.
+ * @head: pointer to the list.
+ * @index: position of the node to delete.
  * Return: 1 if it succeeded, -1 if it failed.
- */
+ **/
 int delete_nodeint_at_index(listint_t **head, unsigned int index)
 {
-    if (head == NULL || *head == NULL) // Check if the head pointer or the list is empty.
-        return -1;
+	listint_t *aux_node = *head;
+	listint_t *node_to_delete = *head;
+	unsigned int idx;
+	unsigned int cont = 0;
 
-    if (index == 0) // Special case: Delete the head node.
-    {
-        listint_t *temp = *head; // Create a temporary pointer to the head.
-        *head = (*head)->next; // Update the head to point to the next node.
-        free(temp); // Free the memory of the previous head node.
-        return 1; // Return 1 to indicate success.
-    }
+	/* border case for empty list */
+	if (!(*head))
+		return (-1);
 
-    listint_t *prev_node = NULL; // Declare a pointer to the previous node.
-    listint_t *current = *head; // Declare a pointer to traverse the list.
-    unsigned int count = 0; // Initialize a count to keep track of the index.
+	/* border case for delete at the beginning */
+	if (index == 0)
+	{
+		*head = node_to_delete->next;
+		free(node_to_delete);
+		return (1);
+	}
 
-    while (current != NULL)
-    {
-        if (count == index) // If we've reached the desired index.
-        {
-            if (prev_node != NULL) // If not deleting the head node.
-                prev_node->next = current->next; // Update the previous node's next pointer.
+	/* search of position to delete */
+	idx = index - 1;
+	while (aux_node && cont != idx)
+	{
+		cont++;
+		aux_node = aux_node->next;
+	}
 
-            free(current); // Free the memory of the current node.
-            return 1; // Return 1 to indicate success.
-        }
+	/* general case */
+	if (cont == idx && aux_node)
+	{
+		node_to_delete = aux_node->next;
+		aux_node->next = node_to_delete->next;
+		free(node_to_delete);
+		return (1);
+	}
 
-        prev_node = current; // Update the previous node.
-        current = current->next; // Move to the next node.
-        count++; // Increment the count.
-    }
-
-    return -1; // If the desired index is not found, return -1 (failure).
+	return (-1);
 }
