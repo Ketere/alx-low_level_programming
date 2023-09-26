@@ -1,18 +1,24 @@
-#include <stdlib.h>
-#include "lists.h" // Include your header file that contains the listint_t structure.
+#include "lists.h"
 
 /**
- * free_listint - Frees a listint_t list.
- * @head: A pointer to the head of the list.
- */
+ * free_listint - frees a listint_t list.
+ * @head: pointer to the list.
+ **/
 void free_listint(listint_t *head)
 {
-    listint_t *current; // Declare a pointer to traverse the list.
+	listint_t *actual_node;
+	listint_t *next_node;
 
-    while (head != NULL) // Iterate through the list until the end (NULL) is reached.
-    {
-        current = head; // Store the current node in 'current'.
-        head = head->next; // Move 'head' to the next node.
-        free(current); // Free the memory of the current node.
-    }
+	if (head)
+	{
+		actual_node = head;
+		next_node = head->next;
+		while (next_node)
+		{
+			free(actual_node);
+			actual_node = next_node;
+			next_node = next_node->next;
+		}
+		free(actual_node);
+	}
 }
